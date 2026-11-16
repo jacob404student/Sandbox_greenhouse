@@ -5,7 +5,7 @@ Owner: Drew Jacobson
 from .helpers import _clamp
 
 
-"""Return the heater power for this tick, a number in [0, 100]. test"""
+"""Return the heater power for this tick, a number in [0, 100]."""
 
 def control_heater(readings, setpoints, dt, state) -> float:
     Ki = 0.05
