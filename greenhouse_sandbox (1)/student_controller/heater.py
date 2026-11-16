@@ -10,12 +10,11 @@ from .helpers import _clamp
 def control_heater(readings, setpoints, dt, state) -> float:
     Ki = 0.05
     Kp = 10.0
-    error = 22.0 - readings.temperature_c
+    error = setpoints.temperature_c - readings.temperature_c
 
     integral = state.get("heater_integral", 0.0) + (error * dt)
     state["heater_integral"] = integral
     
-    output   = Kp * error + Ki * integral 
 
     u = (Kp * error) + (Ki * integral)
 
@@ -45,7 +44,7 @@ def control_heater(readings, setpoints, dt, state) -> float:
     -------
     float
         Heater power percent, from 0 to 100.
-    """
+    
     # TODO: Replace this stub with your Milestone 3 heater design.
     # Your M3 flowchart is the specification. Keep each command in range
     # before you return it:
@@ -57,4 +56,4 @@ def control_heater(readings, setpoints, dt, state) -> float:
     # Pressing Run on this
     # file by itself stops with "attempted relative import with no known
     # parent package".
-    return 0.0
+    return 0.0"""
