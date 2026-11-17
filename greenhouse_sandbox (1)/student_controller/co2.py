@@ -1,6 +1,6 @@
 """CO2 valve control for the GHU-2 greenhouse (percent open, 0 to 100).
 
-Owner: <name>
+Owner: Charlotte Gesell
 """
 from .helpers import _clamp
 
