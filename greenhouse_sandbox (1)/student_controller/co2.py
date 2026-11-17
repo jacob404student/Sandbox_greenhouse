@@ -54,10 +54,10 @@ def control_co2(readings, setpoints, dt, state) -> float:
     -------
     float
         CO2 valve opening percent, from 0 to 100.
-    """
+    
     # TODO: Replace this stub with your Milestone 3 CO2 design.
     # Your M3 flowchart is the specification, including your CO2 sensor-trust
     # rule. Keep each command in range before you return it:
     #   1. At the top of this file, add "from .helpers import _clamp".
     #   2. Return "_clamp(u, 0.0, 100.0)", where u is your command.
-    return 0.0
+    return 0.0"""
