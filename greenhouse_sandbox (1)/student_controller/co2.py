@@ -11,13 +11,25 @@ def control_co2(readings, setpoints, dt, state) -> float:
     k30 = readings.co2_ppm_primary
     scd41 = readings.co2_ppm_backup
 
-    divergence = k30 - scd41
+    divergence = abs(k30 - scd41)
 
     last_reading = state.get("co2_last_reading", 0)
-    same_reading = state.get("co2_s")
+    frozen_reading = state.get("co2_frozen_reading", 0)
     state["co2_last_reading"] = k30
+    state["co2_frozen_reading"] = frozen_count
 
-    if k30 == 
+    if k30 == last_reading:
+        frozen_count +=1
+    else:
+        frozen_count = 0
+
+    if divergence > 200 or frozen_count >= 20:
+        active_co2 = scd41
+    else:
+        active_co2 = k30
+
+    u = float(Kp * (co2_target - active_co2))
+    return _clamp(u, 0.0, 100.0)
 
     
     """Return the CO2 valve opening for this tick, a number in [0, 100].
