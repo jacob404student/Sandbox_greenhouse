@@ -14,9 +14,8 @@ def control_co2(readings, setpoints, dt, state) -> float:
     divergence = abs(k30 - scd41)
 
     last_reading = state.get("co2_last_reading", 0)
-    frozen_reading = state.get("co2_frozen_reading", 0)
-    state["co2_last_reading"] = k30
-    state["co2_frozen_reading"] = frozen_count
+    frozen_count = state.get("co2_frozen_reading", 0)
+    
 
     if k30 == last_reading:
         frozen_count +=1
@@ -27,6 +26,9 @@ def control_co2(readings, setpoints, dt, state) -> float:
         active_co2 = scd41
     else:
         active_co2 = k30
+
+    state["co2_last_reading"] = k30
+    state["co2_frozen_reading"] = frozen_count
 
     u = float(Kp * (co2_target - active_co2))
     return _clamp(u, 0.0, 100.0)
