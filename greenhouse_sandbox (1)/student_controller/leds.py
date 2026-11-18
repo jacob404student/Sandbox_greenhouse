@@ -5,7 +5,19 @@ Owner: <name>
 from .helpers import _clamp
 
 def control_leds(readings, setpoints, dt, state) -> float:
-    if par_umol_m2_s 
+    if setpoints.is_daytime:
+        current_par = readings.par_umol_m2_s
+    target_par = 400.0
+    if current_par < target_par:
+            u = 100.0
+        else:
+            u = 0.0
+    else:
+        # Nighttime: LEDs off
+        u = 0.0
+    state["leds_last_command"] = u
+    return _clamp(u, 0.0, 100.0)
+
     """Return the LED intensity for this tick, a number in [0, 100].
 
     Parameters
